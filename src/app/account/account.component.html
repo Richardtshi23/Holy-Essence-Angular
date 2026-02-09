@@ -1,0 +1,28 @@
+<div class="premium-account-page">
+  <!-- 1. The Personalized Welcome Header -->
+  <header class="account-header">
+    <h1 class="account-title">Welcome, {{ userName || 'Believer' }}</h1>
+    <p class="account-subtitle">Manage your details, track your blessings, and view your order history.</p>
+  </header>
+
+  <div class="account-container">
+    <!-- 2. The Redesigned Sidebar Navigation -->
+    <aside class="account-sidebar">
+      <nav>
+        <a routerLink="details" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">My Details</a>
+        <a routerLink="orders" routerLinkActive="active">Orders</a>
+        <a routerLink="enquiries" routerLinkActive="active">Enquiries</a>
+        <a routerLink="email-preferences" routerLinkActive="active">Email Preferences</a>
+        <button (click)="logOut()" class="logout-btn">Log Out</button>
+      </nav>
+    </aside>
+
+    <!-- 3. The Main Content Area (inside a card) -->
+    <main class="account-main">
+      <div class="account-content-card">
+        <!-- Your forms and lists will be rendered here -->
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+</div>

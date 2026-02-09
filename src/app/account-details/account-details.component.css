@@ -1,0 +1,43 @@
+.details-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-section {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.5rem;
+}
+
+  .form-section h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+label {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.update-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  width: fit-content;
+}
+
+  .update-btn:hover {
+    background: #0056b3;
+  }

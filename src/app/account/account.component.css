@@ -1,0 +1,136 @@
+/* --- ULTRA-PREMIUM ACCOUNT PAGE STYLES (Self-Contained) --- */
+
+.premium-account-page {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9; /* Directly inserted color */
+  min-height: 80vh;
+}
+
+/* 1. The Header */
+.account-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e5e5; /* Directly inserted color */
+}
+
+.account-title {
+  font-family: 'Cormorant Garamond', serif; /* Directly inserted font */
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin: 0;
+  color: #1a1a1a; /* Directly inserted color */
+}
+
+.account-subtitle {
+  font-family: 'Inter', sans-serif; /* Directly inserted font */
+  font-size: 1.1rem;
+  color: #555; /* Directly inserted color */
+  margin-top: 0.5rem;
+}
+
+/* Main Two-Column Layout */
+.account-container {
+  display: grid;
+  grid-template-columns: 240px 1fr; /* Sidebar width + remaining space */
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* 2. The Sidebar */
+.account-sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+  .account-sidebar nav a,
+  .account-sidebar nav .logout-btn {
+    font-family: 'Inter', sans-serif; /* Directly inserted font */
+    font-weight: 500;
+    text-decoration: none;
+    color: #555; /* Directly inserted color */
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    border: none;
+    background: none;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+    .account-sidebar nav a:hover {
+      background-color: #edeef2;
+      color: #1a1a1a; /* Directly inserted color */
+    }
+
+    /* The elegant, on-brand active state */
+    .account-sidebar nav a.active {
+      color: #c79a3b; /* Directly inserted "Divine Gold" accent color */
+      background-color: #fffaf0; /* A very light gold background */
+      font-weight: 600;
+    }
+
+.logout-btn {
+  margin-top: 1rem;
+  color: #b91c1c !important; /* Directly inserted error color */
+}
+
+  .logout-btn:hover {
+    background-color: #ffebee !important;
+    color: #b91c1c !important; /* Directly inserted error color */
+  }
+
+/* 3. The Main Content Card */
+.account-main {
+  width: 100%;
+}
+
+.account-content-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .premium-account-page {
+    padding: 1rem;
+  }
+
+  .account-container {
+    grid-template-columns: 1fr; /* Single column layout */
+  }
+
+  /* Transform sidebar into a horizontal navigation bar */
+  .account-sidebar {
+    border-bottom: 1px solid #e5e5e5; /* Directly inserted color */
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+    .account-sidebar nav {
+      flex-direction: row;
+      overflow-x: auto; /* Allow scrolling if links don't fit */
+      scrollbar-width: none; /* Hide scrollbar */
+    }
+
+      .account-sidebar nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .account-sidebar nav a {
+        white-space: nowrap; /* Prevent links from wrapping */
+        margin-bottom: 0;
+      }
+
+  .logout-btn {
+    margin-top: 0;
+    margin-left: auto; /* Push logout to the far right */
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}

@@ -1,0 +1,225 @@
+/* --- HERO SECTION: "CONTAINED RADIANCE" VERSION --- */
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --font-display: 'Cormorant Garamond', serif;
+  --color-accent: #c79a3b; /* Divine Gold */
+}
+
+/* The wrapper from your original code, to control width */
+.hero-wrapper {
+  max-width: 90vw;
+  margin: 2rem auto; /* Adds some space above and below */
+}
+
+/* The main hero container, now respecting the wrapper */
+.premium-hero {
+  position: relative;
+  height: 60vh;
+  min-height: 450px; /* Ensures it's not too short on tall screens */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  border-radius: 12px; /* Premium rounded corners */
+  background-image: url('../../assets/AnointingOil.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* The pulsing divine light effect */
+.divine-light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 350px;
+  height: 350px; /* Slightly smaller for the container */
+  background: radial-gradient(circle, rgba(255, 235, 204, 0.3) 0%, rgba(255, 235, 204, 0) 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  animation: pulse-light 5s infinite ease-in-out;
+}
+
+@keyframes pulse-light {
+  0% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.7;
+  }
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 2rem;
+  animation: fadeInSlideUp 1.2s ease-out forwards;
+}
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Text shadow and glow for readability on the bright image */
+.hero__title {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 220, 150, 0.3);
+}
+
+.hero__subtitle {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 550px;
+  margin: 0 auto 2rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.hero__cta {
+  display: inline-block;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1a1a1a;
+  background-color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  padding: 12px 30px;
+  border-radius: 6px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  animation: pulse-cta 2.5s infinite;
+  transition: all 0.3s ease;
+}
+
+@keyframes pulse-cta {
+  0% {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2), 0 0 0 0 rgba(199, 154, 59, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2), 0 0 0 10px rgba(199, 154, 59, 0);
+  }
+
+  100% {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2), 0 0 0 0 rgba(199, 154, 59, 0);
+  }
+}
+
+.hero__cta:hover {
+  background-color: #a88234;
+  border-color: #a88234;
+  transform: translateY(-3px);
+  animation: none;
+}
+
+.hero__trust-builders {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  flex-wrap: wrap;
+}
+
+  .hero__trust-builders .divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+.hero__promise {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.hero__nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+  .hero__nav-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .hero__nav-button.left {
+    left: 20px;
+  }
+
+  .hero__nav-button.right {
+    right: 20px;
+  }
+
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 992px) {
+  .hero__title {
+    font-size: 2.8rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-wrapper {
+    max-width: 95vw;
+  }
+
+  .hero__title {
+    font-size: 2.2rem;
+  }
+
+  .hero__trust-builders {
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+    .hero__trust-builders .divider {
+      display: none;
+    }
+}

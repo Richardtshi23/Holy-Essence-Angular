@@ -1,0 +1,104 @@
+<div class="admin-page-container">
+  <header class="admin-header">
+    <h1 class="admin-title">Order Management</h1>
+
+    <!-- The "Bulk Actions" button, which only appears when orders are selected -->
+    <div *ngIf="selectedOrderIds.size > 0" class="bulk-actions-container">
+      <button class="bulk-actions-btn" (click)="applyBulkAction('mark_fulfilled')">
+        Mark {{ selectedOrderIds.size }} as Fulfilled
+      </button>
+      <!-- You can add more bulk action buttons here, e.g., for deleting -->
+    </div>
+  </header>
+
+  <!-- The Tabbed Navigation -->
+  <div class="tabs-nav">
+    <button class="tab-btn" [class.active]="activeTab === 'pending'" (click)="setActiveTab('pending')">
+      Pending Orders
+    </button>
+    <button class="tab-btn" [class.active]="activeTab === 'fulfilled'" (click)="setActiveTab('fulfilled')">
+      Fulfilled Orders
+    </button>
+  </div>
+
+  <div class="admin-content-card">
+    <!-- The Premium Orders Table -->
+    <div class="orders-table-wrapper">
+      <table class="premium-table">
+        <thead>
+          <tr>
+            <th class="checkbox-col">
+              <!-- "Select All" Checkbox -->
+              <input type="checkbox" (change)="toggleSelectAll($event)">
+            </th>
+            <th>Order Date</th>
+            <th>Reference #</th>
+            <th>Customer</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+            <th>Fulfilled</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Loop through the filtered orders -->
+          <tr *ngFor="let order of filteredOrders">
+            <td class="checkbox-col">
+              <!-- Checkbox for each row -->
+              <input type="checkbox"
+                     [checked]="isSelected(order.id)"
+                     (change)="toggleSelection(order.id, $event)">
+            </td>
+            <td>{{ order.orderDate | date:'medium' }}</td>
+            <td class="reference">{{ order.reference }}</td>
+            <td>{{ order.username }}</td>
+            <td class="amount">R{{ order.totalAmount.toFixed(2) }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="getStatusClass(order.status)">{{ order.status }}</span>
+            </td>
+            <td class="fulfilled-status">
+              <span *ngIf="order.isFulfilled" class="icon-fulfilled" title="Fulfilled">✓</span>
+              <span *ngIf="!order.isFulfilled" class="icon-pending" title="Pending">✖</span>
+            </td>
+            <td class="actions">
+              <button class="action-btn view" (click)="viewOrderDetails(order)">View Details</button>
+              <button *ngIf="!order.isFulfilled" class="action-btn fulfill" (click)="markAsFulfilled(order.id)">Mark Fulfilled</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Message for empty lists -->
+    <div *ngIf="filteredOrders.length === 0" class="no-orders-message">
+      <p>No {{ activeTab }} orders found.</p>
+    </div>
+
+    <!-- Elegant Pagination -->
+    <div class="pagination">
+      <!-- Pagination controls would go here -->
+    </div>
+  </div>
+</div>
+
+<!-- Simple modal for viewing order details -->
+<div class="modal-overlay" *ngIf="selectedOrder" (click)="closeOrderDetails()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeOrderDetails()">×</button>
+    <h3 class="modal-title">Order Details ({{ selectedOrder.reference }})</h3>
+    <div class="modal-body">
+      <h4>Items Purchased:</h4>
+      <ul>
+        <li *ngFor="let item of selectedOrder.items">
+          {{ item.productName }} (x{{ item.quantity }}) - R{{ item.subtotal.toFixed(2) }}
+        </li>
+      </ul>
+      <h4>Shipping Address:</h4>
+      <p>
+        {{ selectedOrder.shippingAddress }}<br>
+        {{ selectedOrder.shippingCity }}, {{ selectedOrder.shippingPostalCode }}<br>
+        {{ selectedOrder.shippingCountry }}
+      </p>
+    </div>
+  </div>
+</div>

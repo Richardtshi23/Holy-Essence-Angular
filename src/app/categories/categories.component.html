@@ -1,0 +1,29 @@
+<div class="blessing-gallery">
+  <h1 class="gallery__title">Shop by Blessing</h1>
+
+  <div class="gallery__grid">
+    <!-- This now loops through your exact categories array from the .ts file -->
+    <div class="category-card" *ngFor="let category of categories">
+      <a [routerLink]="category.link" class="card__link">
+
+        <!-- The background image for the card -->
+        <div class="card__background" [ngStyle]="{'background-image': 'url(' + category.image + ')'}"></div>
+
+        <!-- The dark overlay for text readability -->
+        <div class="card__overlay"></div>
+
+        <!-- The content that sits on top of the image -->
+        <div class="card__content">
+          <h3 class="card__title">{{ category.name }}</h3>
+          <p class="card__tagline">{{ category.tagline }}</p>
+        </div>
+
+        <!-- The call-to-action that appears on hover -->
+        <span class="card__cta">Shop Now →</span>
+
+        <!-- The bestseller badge (conditionally shown based on the new .ts file) -->
+        <span class="card__badge" *ngIf="category.isBestseller">Bestseller</span>
+      </a>
+    </div>
+  </div>
+</div>

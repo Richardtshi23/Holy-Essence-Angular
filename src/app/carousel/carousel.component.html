@@ -1,0 +1,48 @@
+<!-- The main container no longer needs a background or border; it's just for layout -->
+<div class="premium-carousel-container">
+  <h2 class="premium-carousel-title">{{ title }}</h2>
+
+  <div class="premium-carousel-wrapper">
+    <!-- Navigation buttons are now sleeker -->
+    <button class="nav-button prev" (click)="scrollLeft()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+
+    <div class="carousel" #carousel>
+      <div class="carousel-item" *ngFor="let item of items">
+        <a routerLink="listItem/{{item.id}}">
+          <div class="image-container">
+            <img [src]="imageBaseUrl + item.image" [alt]="item.name" />
+
+            <!-- Badges are still here -->
+            <span class="badge badge-sale">On Sale</span> <!--*ngIf="item.oldPrice"-->
+            <span class="badge badge-top">⭐ Top Seller</span> <!--*ngIf="item.isTopSeller"-->
+
+            <!-- MOVED: Stars are now inside the image container to be overlaid -->
+            <div class="image-stars">
+              <i class="star filled">★</i>
+              <span class="image-rating-number">{{ item.averageRating ? item.averageRating.toFixed(1) : '0.0' }}</span>
+            </div>
+
+            <!-- NEW: This div contains actions that appear on hover -->
+            <div class="hover-actions">
+              <button class="add-to-cart-btn" (click)="addToCart(item, $event)">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="item-details">
+            <p class="title">{{ item.name }}</p>
+            <div class="price-wrapper">
+              <p class="price">R{{ item.price }}</p>
+              <p *ngIf="item.oldPrice" class="old-price">R{{ item.oldPrice }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <button class="nav-button next" (click)="scrollRight()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+</div>

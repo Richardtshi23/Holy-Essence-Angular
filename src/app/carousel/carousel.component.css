@@ -1,0 +1,242 @@
+/* --- PREMIUM CAROUSEL STYLES (with Two-Item Mobile Peek Effect) --- */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.premium-carousel-container {
+  width: 90%;
+  margin: 4rem auto;
+  font-family: 'Inter', sans-serif;
+}
+
+.premium-carousel-title {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 2.2rem;
+  color: #222;
+  margin-bottom: 2rem;
+}
+
+.premium-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #f0f0f0;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.premium-carousel-wrapper:hover .nav-button {
+  opacity: 1;
+}
+
+.nav-button:hover {
+  background-color: #ffffff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-button.prev {
+  left: -22px;
+}
+
+.nav-button.next {
+  right: -22px;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 1rem 0;
+  gap: 1.5rem;
+}
+
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+.carousel-item {
+  flex: 0 0 calc(25% - 1.2rem);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+}
+
+.carousel-item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.carousel-item:hover img {
+  transform: scale(1.05);
+}
+
+.item-details {
+  padding: 0.8rem 0.2rem;
+}
+
+  .item-details .title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #222;
+    margin: 0 0 0.5rem 0;
+    height: 2.8em;
+    overflow: hidden;
+  }
+
+.price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.old-price {
+  font-size: 0.9rem;
+  color: #666;
+  text-decoration: line-through;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 5px 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 4px;
+  color: white;
+  z-index: 3;
+}
+
+.badge-sale {
+  background-color: #d9534f;
+}
+
+.badge-top {
+  background-color: #c79a3b;
+  top: 42px;
+}
+
+.image-stars {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  backdrop-filter: blur(4px);
+}
+
+  .image-stars .star.filled {
+    color: #ffc107;
+  }
+
+.hover-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.carousel-item:hover .hover-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+  .add-to-cart-btn:hover {
+    background-color: #c79a3b;
+  }
+
+/* --- THE CORRECTED RESPONSIVE FIX with "Two-Item Peek Effect" --- */
+@media (max-width: 768px) {
+  .nav-button {
+    display: none; /* Hide arrows on mobile */
+  }
+
+  .premium-carousel-container {
+    width: 100%; /* Use full width to manage padding correctly */
+  }
+
+  .carousel {
+    /* KEY FIX #1: Add padding on the left for alignment */
+    padding-left: 1rem;
+    scroll-padding-inline-start: 1rem; /* Ensures first item aligns with padding */
+    scroll-snap-type: x mandatory;
+  }
+
+  .carousel-item {
+    /* 
+      KEY FIX #2: Make each item slightly less than half the screen width.
+      calc(50% - 1.5rem) means "half the screen, minus some space for the gap and the peek".
+      You can adjust the '1.5rem' value to make the peek larger or smaller.
+    */
+    flex: 0 0 calc(50% - 1.5rem);
+    scroll-snap-align: start;
+  }
+}
+
+/* On very small screens, revert to a single-item peek for clarity */
+@media (max-width: 480px) {
+  .carousel-item {
+    /* Reverting to a wider card for better readability on tiny screens */
+    flex: 0 0 80%;
+  }
+}

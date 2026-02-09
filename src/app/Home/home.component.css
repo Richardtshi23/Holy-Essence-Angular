@@ -1,0 +1,24 @@
+
+.payments {
+  margin-top: 2rem;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+  .payments p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+.payment-logos img {
+  height: 30px;
+  margin-right: 1rem;
+}
+
+hr {
+  border: none; 
+  border-top: 2px solid #ccc;
+  width: 80%;
+  margin: 20px auto;
+}

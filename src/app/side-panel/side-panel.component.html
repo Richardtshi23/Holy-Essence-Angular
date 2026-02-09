@@ -1,0 +1,38 @@
+<!-- The dark overlay that fades in -->
+<div class="side-panel-overlay" [class.open]="isOpen" (click)="close()"></div>
+
+<!-- The premium side panel itself -->
+<aside class="premium-side-panel" [class.open]="isOpen">
+
+  <header class="panel-header">
+    <!-- Brand Reinforcement -->
+    <a routerLink="/" (click)="close()" class="panel-logo">
+      <img src="../../assets/transparent logo.png" alt="Holy Essence Logo">
+    </a>
+    <!-- Sleek new close button -->
+    <button class="close-btn" (click)="close()">
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+    </button>
+  </header>
+
+  <nav class="panel-nav">
+    <!-- Main "Shop" links -->
+    <a routerLink="/item/display/All" class="panel-link" (click)="close()">Shop All</a>
+
+    <hr class="divider">
+
+    <p class="nav-heading">Shop by Blessing</p>
+    <a [routerLink]="['/item/category','Oils']" class="panel-link" (click)="close()">Anointed Oils</a>
+    <a [routerLink]="['/item/category','Water']" class="panel-link" (click)="close()">Anointed Water</a>
+    <a [routerLink]="['/item/category','Apparel']" class="panel-link" (click)="close()">Apparel</a>
+    <a [routerLink]="['/item/category','Bundles']" class="panel-link" (click)="close()">Blessing Sets</a>
+
+    <hr class="divider">
+
+    <p class="nav-heading">Our Mission</p>
+    <a routerLink="/about-us" class="panel-link" (click)="close()">About Us</a>
+    <a routerLink="/contact" class="panel-link" (click)="close()">Contact Us</a>
+    <a routerLink="/faq" class="panel-link" (click)="close()">FAQ</a>
+  </nav>
+
+</aside>

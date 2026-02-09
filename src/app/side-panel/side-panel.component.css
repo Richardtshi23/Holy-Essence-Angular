@@ -1,0 +1,113 @@
+/* --- ULTRA-PREMIUM SIDE PANEL STYLES (Self-Contained) --- */
+
+/* The dark overlay */
+.side-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s 0.4s;
+}
+
+  .side-panel-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease;
+  }
+
+/* The side panel itself */
+.premium-side-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%;
+  max-width: 320px;
+  height: 100%;
+  background-color: #1a1a1a; /* Directly inserted color */
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+  z-index: 1100;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+  .premium-side-panel.open {
+    transform: translateX(0);
+  }
+
+/* Header with logo and close button */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #333;
+  flex-shrink: 0;
+}
+
+.panel-logo img {
+  height: 50px;
+  width: auto;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #a0a0a0; /* Directly inserted color */
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+  .close-btn:hover {
+    color: white;
+  }
+
+  .close-btn svg {
+    width: 28px;
+    height: 28px;
+  }
+
+/* Navigation links area */
+.panel-nav {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.nav-heading {
+  font-family: 'Inter', sans-serif; /* Directly inserted font */
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #777;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.panel-link {
+  display: block;
+  font-family: 'Cormorant Garamond', serif; /* Directly inserted font */
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #a0a0a0; /* Directly inserted color */
+  text-decoration: none;
+  padding: 0.75rem 0;
+  transition: color 0.3s ease;
+}
+
+  .panel-link:hover {
+    color: #c79a3b; /* Directly inserted "Divine Gold" accent color */
+  }
+
+.divider {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 1.5rem 0;
+}

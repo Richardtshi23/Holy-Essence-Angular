@@ -1,0 +1,97 @@
+<div class="checkout-page-premium">
+  <header class="checkout-header">
+    <a routerLink="/" class="logo">
+      <img src="../../assets/transparent logo.png" alt="Holy Essence Logo" />
+    </a>
+    <div class="secure-badge">
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V13H5V6.3l7-3.11v8.8z" fill="currentColor" /></svg>
+      <span>Secure Checkout</span>
+    </div>
+  </header>
+
+  <main class="checkout-grid">
+    <div class="form-section">
+      <div class="stepper">
+        <span [class.active]="currentStep === 1">Information</span> >
+        <span [class.active]="currentStep === 2">Shipping</span> >
+        <span [class.active]="currentStep === 3">Payment</span>
+      </div>
+
+      <form [formGroup]="checkoutForm">
+        <!-- Step 1: Information -->
+        <div *ngIf="currentStep === 1" class="form-step">
+          <h3>Contact Information</h3>
+          <div class="form-group">
+            <input id="email" type="email" formControlName="email" placeholder="Email Address">
+          </div>
+          <h3>Shipping Address</h3>
+          <div class="form-group">
+            <input id="name" type="text" formControlName="name" placeholder="Full Name">
+          </div>
+          <div class="form-group">
+            <input id="phone" type="text" formControlName="phone" placeholder="Phone Number">
+          </div>
+          <div class="form-group">
+            <input id="address" type="text" formControlName="address" placeholder="Street Address">
+          </div>
+          <div class="form-group half-width">
+            <input id="city" type="text" formControlName="city" placeholder="City">
+            <input id="postal" type="text" formControlName="postal" placeholder="Postal Code">
+          </div>
+          <button class="next-step-btn" (click)="goToNextStep()" [disabled]="checkoutForm.invalid">Continue to Shipping</button>
+        </div>
+      </form>
+
+      <!-- Step 2: Shipping -->
+      <div *ngIf="currentStep === 2" class="form-step">
+        <h3>Shipping Method</h3>
+        <div class="shipping-option">
+          <label for="standard">
+            <span>Standard Shipping</span>
+            <span>R{{ shippingCost.toFixed(2) }}</span>
+          </label>
+        </div>
+        <div class="button-group">
+          <button class="prev-step-link" (click)="goToPrevStep()">← Return to Information</button>
+          <button class="next-step-btn" (click)="goToNextStep()">Continue to Payment</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment -->
+      <div *ngIf="currentStep === 3" class="form-step">
+        <h3>Payment Confirmation</h3>
+        <p class="payment-subtitle">You will be redirected to our secure payment partner, Paystack, to complete your purchase.</p>
+        <div class="payment-reassurance">
+          <p>Your Order Total:</p>
+          <span class="final-total">R{{ getTotal() + shippingCost }}</span>
+        </div>
+        <div class="button-group">
+          <button class="prev-step-link" (click)="goToPrevStep()">← Return to Shipping</button>
+          <!-- This button now calls your existing submitCheckout method -->
+          <button class="complete-order-btn" (click)="submitCheckout()">Pay with Paystack</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Order Summary -->
+    <aside class="order-summary" *ngIf="cart.length > 0">
+      <div class="summary-items">
+        <div class="summary-item" *ngFor="let i of cart">
+          <div class="image-wrapper">
+            <img [src]="imageBaseUrl + i.image" [alt]="i.name" class="summary-item__image">
+            <span class="summary-item__qty">{{ i.qty }}</span>
+          </div>
+          <div class="summary-item__details">
+            <span class="summary-item__name">{{ i.name }}</span>
+          </div>
+          <span class="summary-item__price">R{{ (i.price * i.qty).toFixed(2) }}</span>
+        </div>
+      </div>
+      <div class="summary-totals">
+        <div class="summary-row"><span>Subtotal</span><span>R{{ getTotal().toFixed(2) }}</span></div>
+        <div class="summary-row"><span>Shipping</span><span>R{{ shippingCost.toFixed(2) }}</span></div>
+        <div class="summary-row total"><span>Total</span><span>R{{ (getTotal() + shippingCost).toFixed(2) }}</span></div>
+      </div>
+    </aside>
+  </main>
+</div>

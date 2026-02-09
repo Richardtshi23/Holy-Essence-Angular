@@ -1,0 +1,21 @@
+<app-display>
+</app-display>
+<div style="display:inline-block; height:0vh"></div>
+<div class="payments">
+  <p>Accepted Payment Methods:</p>
+  <div class="payment-logos">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Apple_Logo.svg" alt="Apple Pay">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay">
+  </div>
+</div>
+<hr />
+<app-categories>
+</app-categories>
+<h2 style="font-family:'Times New Roman', Times, serif">Frequently Purchased Blessing Items</h2>
+<app-carousel [categories]="'Oils'">
+</app-carousel>
+<h2 style="font-family:'Times New Roman', Times, serif">Blessing Bundles Frequently Bought Together</h2>
+<app-carousel [categories]="'Bundles'">
+</app-carousel>

@@ -1,0 +1,64 @@
+<div class="auth-page">
+  <!-- Left Column: The Form -->
+  <div class="form-column">
+    <div class="form-container">
+      <!-- Success message for users who just registered -->
+      <div *ngIf="registrationSuccess" class="success-message">
+        Registration successful! Please log in to continue.
+      </div>
+
+      <h1 class="auth-title">Welcome Back</h1>
+      <p class="auth-subtitle">
+        New to Holy Essence? <a routerLink="/register">Create an account</a>
+      </p>
+
+      <!-- Error message for failed login attempts -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" formControlName="email" placeholder="you@example.com">
+          <div *ngIf="email.invalid && email.touched" class="error">
+            <span *ngIf="email.errors?.['required']">Email is required.</span>
+            <span *ngIf="email.errors?.['email']">Please enter a valid email.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-wrapper">
+            <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Enter your password">
+            <button type="button" class="show-hide-btn" (click)="toggleShowPassword()">
+              {{ showPassword ? 'Hide' : 'Show' }}
+            </button>
+          </div>
+          <div *ngIf="password.invalid && password.touched" class="error">Password is required.</div>
+        </div>
+
+        <div class="form-row">
+          <label class="remember-me">
+            <input type="checkbox" formControlName="remember" /> Remember me
+          </label>
+          <a routerLink="/forgot-password" class="forgot-password">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="auth-cta" [disabled]="submitting">
+          {{ submitting ? 'Logging In...' : 'Log In' }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Right Column: The Branding & Welcome Message -->
+  <div class="branding-column">
+    <div class="branding-content">
+      <h2>Continue Your Journey</h2>
+      <p class="branding-text">
+        Access your order history, manage your saved blessings, and enjoy a seamless checkout experience.
+      </p>
+    </div>
+  </div>
+</div>

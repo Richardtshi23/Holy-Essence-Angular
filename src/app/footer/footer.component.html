@@ -1,0 +1,54 @@
+<footer class="premium-footer">
+  <div class="footer__main-grid">
+
+    <!-- Column 1: The Newsletter Retention Engine -->
+    <div class="footer__column newsletter-column">
+      <h4 class="footer__title">Join Our Blessed Community</h4>
+      <p class="footer__subtitle">Receive exclusive offers, spiritual insights, and be the first to know about new blessed items.</p>
+      <form class="newsletter__form" (submit)="subscribeToNewsletter()">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+
+    <!-- Column 2: About Holy Essence -->
+    <div class="footer__column">
+      <h4 class="footer__title">About Holy Essence</h4>
+      <a routerLink="/our-mission" class="footer__link">Our Mission</a>
+    </div>
+
+    <!-- Column 3: Customer Care -->
+    <div class="footer__column">
+      <h4 class="footer__title">For Customers</h4>
+      <a routerLink="/contact" class="footer__link">Contact & Help</a>
+      <!--<a routerLink="/track-order" class="footer__link">Where's My Order?</a>-->
+    </div>
+
+    <!-- Column 4: International -->
+    <div class="footer__column">
+      <h4 class="footer__title">International</h4>
+      <div class="country-links">
+        <a href="#">Brazil</a> <a href="#">Egypt</a> <a href="#">France</a>
+        <a href="#">Germany</a> <a href="#">South Africa</a> <a href="#">UK</a> <a href="#">US</a>
+        <a href="#">Surrounding African Countries</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Bottom Bar for Legal & Payments -->
+  <div class="footer__bottom">
+    <p class="footer__copyright">© {{ currentYear }} HolyEssence.com Ltd. All Rights Reserved.</p>
+    <div class="footer__payment-icons">
+      <!-- Your payment icons (will be styled with CSS filter for dark mode) -->
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Apple_Logo.svg" alt="Apple Pay">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay">
+    </div>
+    <div class="footer__legal-links">
+      <a routerLink="/sitemap">Site Map</a>
+      <a routerLink="/terms-of-use">Terms of Use</a>
+      <a routerLink="/privacy-policy">Privacy Notice</a>
+    </div>
+  </div>
+</footer>

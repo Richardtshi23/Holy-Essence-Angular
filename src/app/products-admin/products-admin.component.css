@@ -1,0 +1,117 @@
+.admin-wrap {
+  padding: 16px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.header-actions button {
+  margin-left: 8px;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 16px;
+}
+
+.left-panel {
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+  gap: 12px;
+}
+
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+}
+
+  .card .img {
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+  }
+
+.card-body {
+  padding: 8px;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.price {
+  margin-top: 6px;
+}
+
+  .price .old {
+    text-decoration: line-through;
+    margin-left: 8px;
+    color: #888;
+  }
+
+.actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-card {
+  padding: 12px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+  .form-card label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .form-card input, .form-card textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+
+.preview img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+.orders-card {
+  padding: 12px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+
+@media (max-width:900px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+}

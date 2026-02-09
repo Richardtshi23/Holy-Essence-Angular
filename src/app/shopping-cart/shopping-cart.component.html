@@ -1,0 +1,81 @@
+<div class="cart-page-premium">
+  <div class="cart-header">
+    <h1 class="cart-title">Your Shopping Cart</h1>
+    <a [routerLink]="['/item/display', 'All']" class="continue-shopping">← Continue Shopping</a>
+  </div>
+
+  <div *ngIf="cartItems && cartItems.length > 0; else emptyCart">
+    <!-- The Free Shipping Incentive Bar -->
+    <div class="free-shipping-tracker" *ngIf="!hasFreeShipping()">
+      <p>You're only <strong>R{{ amountUntilFreeShipping.toFixed(2) }}</strong> away from FREE shipping!</p>
+      <div class="progress-bar">
+        <div class="progress-bar__filled" [style.width.%]="shippingProgressPercentage"></div>
+      </div>
+    </div>
+    <div class="free-shipping-tracker achieved" *ngIf="hasFreeShipping()">
+      <p><strong>Congratulations! You've earned FREE shipping!</strong> 🎉</p>
+    </div>
+
+    <!-- The Main Cart Grid -->
+    <div class="cart-premium-grid">
+      <!-- Left Column: Items List -->
+      <div class="cart__items-list">
+        <div class="premium-cart-item" *ngFor="let item of cartItems">
+          <img [src]="imageBaseUrl + item.image" alt="{{ item.name }}" class="item-image" />
+          <div class="item-details">
+            <a [routerLink]="['/listItem', item.id]" class="item-name">{{ item.name }}</a>
+            <p class="item-stock">In Stock</p>
+            <button class="remove-btn" (click)="removeItem(item.id)">
+              <i class="icon-trash"></i> Remove
+            </button>
+          </div>
+          <div class="item-quantity-selector">
+            <button (click)="decreaseQuantity(item)">-</button>
+            <input type="number" [value]="item.qty" (change)="updateQuantity(item, $event)" min="1">
+            <button (click)="increaseQuantity(item)">+</button>
+          </div>
+          <div class="item-price">
+            R{{ (item.price * item.qty).toFixed(2) }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Order Summary -->
+      <div class="cart__summary">
+        <h3 class="summary-title">Order Summary</h3>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>R{{ totalPrice.toFixed(2) }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span>{{ hasFreeShipping() ? 'FREE' : 'R' + shippingCost.toFixed(2) }}</span>
+        </div>
+        <hr class="summary-divider">
+        <div class="summary-row total">
+          <span>Total</span>
+          <span>R{{ (totalPrice + (hasFreeShipping() ? 0 : shippingCost)).toFixed(2) }}</span>
+        </div>
+        <button class="checkout-btn" routerLink="/checkout">Proceed to Checkout</button>
+
+        <!-- Trust Builders -->
+        <div class="trust-builders">
+          <div class="trust-item"><i class="icon-shield"></i> Secure SSL Checkout</div>
+          <div class="trust-item"><i class="icon-guarantee"></i> Satisfaction Guaranteed</div>
+        </div>
+        <div class="payment-icons">
+          <!-- Icons here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty Cart Template -->
+  <ng-template #emptyCart>
+    <div class="empty-cart-container">
+      <h2>Your Cart is Empty</h2>
+      <p>Fill it with blessings to bring peace and protection to your home.</p>
+      <a routerLink="/items/all" class="checkout-btn">Shop Our Collection</a>
+    </div>
+  </ng-template>
+</div>

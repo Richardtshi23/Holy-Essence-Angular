@@ -1,0 +1,66 @@
+<div class="order-history-container">
+  <h2 class="section-title">Your Order History</h2>
+
+  <div *ngIf="orders.length > 0; else noOrders">
+    <div class="order-accordion">
+      <div class="order-item" *ngFor="let order of orders">
+        <!-- The clickable header for each order -->
+        <div class="order-header" (click)="toggleOrder(order.id)">
+          <div class="header-section">
+            <span class="header-label">Order Date</span>
+            <span class="header-value">{{ order.orderDate | date:'longDate' }}</span>
+          </div>
+          <div class="header-section">
+            <span class="header-label">Total</span>
+            <span class="header-value">R{{ order.totalAmount.toFixed(2) }}</span>
+          </div>
+          <div class="header-section">
+            <span class="header-label">Status</span>
+            <span class="status-badge" [ngClass]="getStatusClass(order.status)">{{ order.status }}</span>
+          </div>
+          <div class="header-section reference">
+            <span class="header-label">Order #</span>
+            <span class="header-value">{{ order.reference }}</span>
+          </div>
+          <div class="header-section toggle-icon">
+            <span [class.expanded]="isOrderExpanded(order.id)">›</span>
+          </div>
+        </div>
+
+        <!-- The expandable details section -->
+        <div class="order-details" *ngIf="isOrderExpanded(order.id)">
+          <div class="details-grid">
+            <!-- Items Purchased -->
+            <div class="items-section">
+              <h4>Items Purchased</h4>
+              <div class="product-item" *ngFor="let item of order.items">
+                <img [src]="imageBaseUrl + item.productImage" [alt]="item.productName" class="product-image">
+                <div class="product-details">
+                  <span class="product-name">{{ item.productName }}</span>
+                  <span class="product-qty">Quantity: {{ item.quantity }}</span>
+                </div>
+                <span class="product-price">R{{ item.subtotal.toFixed(2) }}</span>
+              </div>
+            </div>
+            <!-- Shipping Details -->
+            <div class="shipping-section">
+              <h4>Shipped To</h4>
+              <p>
+                {{ order.shippingAddress }}<br>
+                {{ order.shippingCity }}, {{ order.shippingPostalCode }}<br>
+                {{ order.shippingCountry }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noOrders>
+    <div class="no-orders-message">
+      <p>You have not placed any orders yet.</p>
+      <a routerLink="/items/all" class="shop-now-btn">Start Shopping</a>
+    </div>
+  </ng-template>
+</div>

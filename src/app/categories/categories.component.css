@@ -1,0 +1,175 @@
+/* --- PREMIUM BLESSING GALLERY STYLES (with Mobile Fix) --- */
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --font-display: 'Cormorant Garamond', serif;
+  --color-accent: #c79a3b; /* Divine Gold */
+}
+
+/* Main container for the gallery */
+.blessing-gallery {
+  max-width: 1400px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+/* The elegant main title */
+.gallery__title {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+  color: #1a1a1a;
+}
+
+/* The grid layout for the category cards */
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* The main container for each category card */
+.category-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  min-height: 380px; /* Set a consistent height */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+  .category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+
+/* The link that wraps the entire card */
+.card__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+/* The card's background image */
+.card__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.category-card:hover .card__background {
+  transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+/* The semi-transparent overlay for text contrast */
+.card__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%);
+  transition: background-color 0.4s ease;
+}
+
+.category-card:hover .card__overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 20%, rgba(0,0,0,0.9) 100%);
+}
+
+/* The text content container */
+.card__content {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+  color: white;
+  text-align: left;
+  z-index: 2;
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover .card__content {
+  transform: translateY(-15px);
+}
+
+/* The main title of the category */
+.card__title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* The benefit-driven tagline */
+.card__tagline {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+/* The "Shop Now" call-to-action that appears on hover */
+.card__cta {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  z-index: 2;
+  color: var(--color-accent);
+  font-family: var(--font-primary);
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+.category-card:hover .card__cta {
+  opacity: 1;
+  transform: translateY(-45px);
+}
+
+/* The elegant bestseller badge */
+.card__badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 2;
+  background-color: var(--color-accent);
+  color: white;
+  padding: 6px 12px;
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* --- THE CORRECTED RESPONSIVE FIX --- */
+@media (max-width: 768px) {
+  .blessing-gallery {
+    padding: 0 1rem;
+  }
+
+  .gallery__grid {
+    /* This rule creates the perfect 2-column layout on mobile */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; /* A smaller gap for a tighter mobile layout */
+  }
+
+  /* These rules polish the mobile look */
+  .category-card {
+    min-height: 300px;
+  }
+
+  .card__title {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,135 @@
+<div class="product-page-premium">
+
+  <!-- Main Product Section with a modern grid layout -->
+  <div class="product-premium-grid">
+
+    <!-- Left Column: Image Gallery -->
+    <div class="product__gallery">
+      <div class="main-image-wrapper">
+        <img [src]="selectedImage || (imageBaseUrl + product.image)" alt="Main product view" class="main-image">
+      </div>
+      <div class="thumbnails">
+        <!-- Assuming you have an array of images. If not, this can be adapted. -->
+        <img *ngFor="let img of product.galleryImages"
+             [src]="imageBaseUrl + img.url"
+             [alt]="img.alt"
+             (click)="selectImage(imageBaseUrl + img.url)"
+             [class.active]="selectedImage === (imageBaseUrl + img.url)">
+      </div>
+    </div>
+
+    <!-- Right Column: The Conversion Zone -->
+    <div class="product__details">
+      <h1 class="product__title">{{ product.name }}</h1>
+      <p class="product__hook">A divine essence to bring peace and protection to your home.</p>
+
+      <!-- Clickable Social Proof -->
+      <a class="product__rating-summary" href="#reviews-section" (click)="scrollToReviews($event)">
+        <div class="stars">
+          <ng-container *ngFor="let s of [1,2,3,4,5]"><i class="star" [class.filled]="s <= round(averageRating)">★</i></ng-container>
+        </div>
+        <span>{{ reviews.length }} Reviews</span>
+      </a>
+
+      <!-- Pricing Block -->
+      <div class="product__price-block">
+        <span class="price">R{{ product.price }}</span>
+        <span *ngIf="product.oldPrice" class="old-price">R{{ product.oldPrice }}</span>
+        <span *ngIf="product.oldPrice" class="sale-badge">SALE</span>
+      </div>
+
+      <!-- Urgency Block -->
+      <div class="product__urgency">
+        <span class="stock-indicator low">Low in Stock!</span> Only 7+ left.
+      </div>
+
+      <!-- Actions Block -->
+      <div class="product__actions">
+        <div class="quantity-selector">
+          <button (click)="quantity = quantity > 1 ? quantity - 1 : 1">-</button>
+          <input type="number" [(ngModel)]="quantity" min="1">
+          <button (click)="quantity = quantity + 1">+</button>
+        </div>
+        <button class="cta__add-to-cart" (click)="addToCart()">Add to Cart</button>
+      </div>
+      <button class="cta__buy-now" (click)="buyNow()">Buy Now with Express Checkout</button>
+
+      <!-- Trust Builders -->
+      <div class="product__trust-builders">
+        <div class="trust-item"><i class="icon-shield"></i>Secure Checkout</div>
+        <div class="trust-item"><i class="icon-package"></i>Ships in 24 Hours</div>
+        <div class="trust-item"><i class="icon-blessed"></i>Blessed in the Holy Land</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lower Section: Tabs and Reviews -->
+  <div class="product-info-section">
+    <!-- Tabs Navigation -->
+    <div class="tabs-nav">
+      <button [class.active]="activeTab === 'description'" (click)="activeTab = 'description'">Description</button>
+      <button [class.active]="activeTab === 'usage'" (click)="activeTab = 'usage'">How to Use</button>
+      <button [class.active]="activeTab === 'reviews'" (click)="activeTab = 'reviews'">Reviews ({{ reviews.length }})</button>
+    </div>
+
+    <!-- Tabs Content -->
+    <div class="tabs-content">
+      <div *ngIf="activeTab === 'description'">
+        <p>{{ product.description || 'Detailed description about the divine origins and blessings of this holy essence...' }}</p>
+      </div>
+      <div *ngIf="activeTab === 'usage'">
+        <p>Instructions on how to use the anointing oil and holy water for maximum blessing...</p>
+      </div>
+      <div *ngIf="activeTab === 'reviews'" id="reviews-section">
+
+        <!-- THE FIXED REVIEWS SECTION -->
+        <div class="reviews-premium">
+          <div class="reviews-summary-block">
+            <h3>Customer Reviews</h3>
+            <!-- Add a nice summary here, e.g., bar charts -->
+          </div>
+
+          <!-- 1. The "Write a Review" Form (now at the top) -->
+          <div class="add-review">
+            <h4>Leave a Review</h4>
+            <div class="form-group">
+              <input type="text" [(ngModel)]="newReview.name" placeholder="Your Name">
+            </div>
+            <div class="form-group">
+              <textarea rows="4" [(ngModel)]="newReview.comment" placeholder="Share your experience..."></textarea>
+            </div>
+            <div class="form-group rating-submit-group">
+              <div class="stars interactive">
+                <i class="star" *ngFor="let s of [1,2,3,4,5]" [class.filled]="s <= newReview.rating" (click)="setRating(s)">★</i>
+              </div>
+              <button class="submit-review" (click)="submitReview()" [disabled]="isPosting">
+                {{ isPosting ? 'Submitting...' : 'Submit Review' }}
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. The Reviews List -->
+          <div class="reviews-list">
+            <div class="review-item" *ngFor="let review of visibleReviews">
+              <div class="review-header">
+                <span class="reviewer-name">{{ review.name }}</span>
+                <div class="stars">
+                  <ng-container *ngFor="let s of [1,2,3,4,5]"><i class="star" [class.filled]="s <= review.rating">★</i></ng-container>
+                </div>
+              </div>
+              <p class="review-comment">{{ review.comment }}</p>
+              <span class="review-date">{{ review.createdAt | date:'longDate' }}</span>
+            </div>
+          </div>
+
+          <!-- 3. The "Show More" Button -->
+          <div class="reviews-footer" *ngIf="reviews.length > reviewsToShow">
+            <button class="show-more-btn" (click)="showMoreReviews()">Show More Reviews</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

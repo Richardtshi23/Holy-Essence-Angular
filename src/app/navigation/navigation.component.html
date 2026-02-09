@@ -1,0 +1,77 @@
+<!-- 1. The "Free Shipping" Announcement Bar (Sales Tactic) -->
+<div class="announcement-bar">
+  <span>Free Shipping on All Orders Over R600</span>
+</div>
+
+<!-- 2. The Main Premium Navigation Bar -->
+<nav class="premium-navbar" [class.scrolled]="isScrolled">
+  <!-- Left Side: Menu and Logo -->
+  <div class="nav-left">
+    <button class="icon-btn menu-icon" (click)="toggleMenu()">
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+    </button>
+    <a class="logo" routerLink="/">
+      <img src="../../assets/transparent logo.png" alt="Holy Essence Logo" />
+    </a>
+  </div>
+
+  <!-- Center Content for Desktop -->
+  <div class="nav-center">
+    <span class="center-verse">“You anoint my head with oil My cup overflows.” — Psalm 23:5</span>
+  </div>
+
+  <!-- Right Side: Search, Account, and Cart Icons -->
+  <div class="nav-right">
+    <button class="icon-btn search-icon" (click)="toggleSearch()">
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19ZM21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+    </button>
+    <button class="icon-btn account-icon" (click)="goToLoginOrProfile()">
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+    </button>
+    <button class="icon-btn cart-icon" (click)="goToCart()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg>
+      <span class="cart-badge" *ngIf="cartCount > 0" [class.pop]="animateCart">{{ cartCount }}</span>
+    </button>
+  </div>
+</nav>
+
+<!-- 3. The "Revealable" Search Overlay with Live Results -->
+<div class="search-overlay" [class.active]="searchOpen" (click)="toggleSearch()">
+  <div class="search-modal" (click)="$event.stopPropagation()">
+
+    <div class="search-form-wrapper">
+      <input type="text"
+             class="search-input"
+             placeholder="Search for blessings..."
+             [formControl]="searchControl">
+
+      <button class="close-search-btn" (click)="toggleSearch()">×</button>
+    </div>
+
+    <div class="search-results" *ngIf="searchResults.length > 0">
+      <a *ngFor="let product of searchResults"
+         [routerLink]="['/listItem', product.id]"
+         (click)="toggleSearch()"
+         class="result-item">
+
+        <img [src]="imageBaseUrl + product.image" [alt]="product.name" class="result-image">
+        <div class="result-details">
+          <span class="result-name">{{ product.name }}</span>
+          <span class="result-price">R{{ product.price.toFixed(2) }}</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="no-results" *ngIf="showNoResultsMessage">
+      <p>No blessings found for "{{ searchControl.value }}"</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Your existing side panel, no changes needed -->
+<app-side-panel [isOpen]="menuOpen" (closePanel)="toggleMenu()"></app-side-panel>

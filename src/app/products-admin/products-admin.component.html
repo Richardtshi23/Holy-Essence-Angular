@@ -1,0 +1,89 @@
+<div class="admin-wrap">
+  <header class="admin-header">
+    <h2>Products Admin</h2>
+    <div class="header-actions">
+      <button (click)="startAdd()">+ Add Product</button>
+      <button (click)="loadProducts()">Refresh</button>
+    </div>
+  </header>
+
+  <section class="main-grid">
+    <div class="left-panel">
+      <h3>Products</h3>
+      <div *ngIf="loading">Loading...</div>
+      <div class="products-grid">
+        <div class="card" *ngFor="let p of products">
+          <div class="img" [style.backgroundImage]="'url(' + p.image + ')'"> </div>
+          <img [src]="imageBaseUrl + p.image" alt="Image" />
+          <div class="card-body">
+            <div class="title">{{p.title}}</div>
+            <div class="meta">{{p.category}} • Qty: {{p.qty}}</div>
+            <div class="price">
+              <span class="current">R{{p.price | number:'1.2-2'}}</span>
+              <span class="old" *ngIf="p.oldPrice">R{{p.oldPrice | number:'1.2-2'}}</span>
+            </div>
+            <div class="actions">
+              <button (click)="startEdit(p)">Edit</button>
+              <button (click)="deleteProduct(p.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <aside class="right-panel">
+      <div *ngIf="showForm" class="form-card">
+        <h3>{{ editing ? 'Edit' : 'Add' }} Product</h3>
+        <form [formGroup]="productForm" (ngSubmit)="save()">
+          <label>Name <input formControlName="name" /></label>
+          <label>Title <input formControlName="title" /></label>
+          <label>Price <input type="number" formControlName="price" /></label>
+          <label>Old Price <input type="number" formControlName="oldPrice" /></label>
+          <label>Category
+            <select formControlName="category">
+              <option>Oils</option>
+              <option>Water</option>
+              <option>bundles</option>
+              <option>Apparel</option>
+
+            </select>
+          </label>
+          <label>Qty <input type="number" formControlName="qty" /></label>
+          <label>Description <textarea formControlName="description"></textarea></label>
+          <label>In Stock <input type="checkbox" formControlName="inStock" /></label>
+          <label>On Sale <input type="checkbox" formControlName="onSale" /></label>
+
+
+          <label class="file">
+            Image
+            <input type="file" (change)="onFileChange($event)" accept="image/*" />
+          </label>
+
+
+          <div class="preview" *ngIf="imagePreview">
+            <img [src]="imagePreview" alt="preview" />
+          </div>
+
+
+          <div class="form-actions">
+            <button type="submit" [disabled]="productForm.invalid">Save</button>
+            <button type="button" (click)="cancelForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+
+      <div class="orders-card">
+        <h3>Recent Orders</h3>
+        <div *ngIf="orders.length === 0">No orders yet.</div>
+        <ul>
+          <li *ngFor="let o of orders">
+            <div class="order-id">Order #{{o.id}} — R{{o.total}}</div>
+            <div class="order-meta">{{o.customerName}} • {{o.createdAt | date:'short'}}</div>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+</div>

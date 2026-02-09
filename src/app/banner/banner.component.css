@@ -1,0 +1,94 @@
+/* --- PREMIUM CATEGORY SHOWCASE STYLES --- */
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --font-display: 'Cormorant Garamond', serif;
+  --color-primary-text: #1a1a1a;
+  --color-secondary-text: #555;
+  --color-border: #e5e5e5;
+  --color-background-light: #f9f9f9;
+}
+
+/* The main container for the section */
+.category-showcase {
+  text-align: center;
+}
+
+/* The main headline, using our premium display font */
+.showcase__title {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: var(--color-primary-text);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+  /* The elegant decorative line above the title */
+  .showcase__title::before {
+    content: '';
+    position: absolute;
+    top: -1rem; /* Positioning above the text */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background-color: #c79a3b;
+  }
+
+/* The supporting paragraph text, optimized for readability */
+.showcase__subtitle {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  line-height: 1.8; /* Increased for better readability */
+  color: var(--color-secondary-text);
+  max-width: 700px;
+  margin: 0 auto 2.5rem; /* Centered with bottom margin */
+}
+
+/* The container for the category buttons */
+.showcase__categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* The new, sophisticated pill-shaped buttons */
+.category-btn-premium {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--color-primary-text);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  padding: 10px 24px;
+  border-radius: 50px; /* This creates the pill shape */
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+  /* The elegant hover effect that fills the button with our accent color */
+  .category-btn-premium:hover {
+    background-color: #c79a3b;
+    border-color: #c79a3b;
+    color: white;
+    transform: translateY(-3px); /* Slight lift on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .category-showcase {
+    margin: 3rem auto;
+    padding: 1rem;
+  }
+
+  .showcase__title {
+    font-size: 2.2rem;
+  }
+
+  .showcase__subtitle {
+    font-size: 1rem;
+  }
+}

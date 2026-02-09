@@ -1,0 +1,86 @@
+<app-banner></app-banner>
+
+<div class="shop-container">
+  <!-- 1. Sophisticated Filtering Header -->
+  <div class="shop-header">
+    <h1 class="shop-title">Our Blessed Collection</h1>
+    <div class="shop-controls">
+      <select class="sort-dropdown">
+        <option value="default">Sort by relevance</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating">Sort by rating</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 2. The Ultra-Premium Product Grid -->
+  <div class="premium-product-grid">
+    <div class="product-card-premium" *ngFor="let product of products">
+      <div class="product-card__image-wrapper">
+        <a [routerLink]="['/listItem', product.id]">
+          <img [src]="imageBaseUrl + product.image" [alt]="product.name" class="product-image" />
+        </a>
+
+        <!-- Dynamic Badges -->
+        <span *ngIf="product.discount" class="badge badge-sale">SALE</span>
+        <span *ngIf="product.averageRating > 4.5" class="badge badge-top">⭐ Top Seller</span>
+
+        <!-- Hover Actions -->
+        <div class="product-card__hover-actions">
+          <button class="action-btn quick-view" (click)="openQuickView(product)">
+            <i class="icon-eye"></i> Quick View
+          </button>
+          <button class="action-btn add-to-cart-icon" (click)="addToCart(product, $event)">
+            <i class="icon-cart"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="product-card__details">
+        <h3 class="product-title">
+          <a [routerLink]="['/listItem', product.id]">{{ product.name }}</a>
+        </h3>
+        <a class="product-rating" [routerLink]="['/listItem', product.id]" fragment="reviews-section">
+          <div class="stars">
+            <ng-container *ngFor="let s of [1,2,3,4,5]"><i class="star" [class.filled]="s <= round(product.averageRating)">★</i></ng-container>
+          </div>
+          <span class="review-count">({{ product.reviewCount || 0 }})</span>
+        </a>
+        <div class="price-section">
+          <span class="price">R{{ product.price }}</span>
+          <!--<span *ngIf="product.rrp" class="rrp">R{{ product.rrp }}</span>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. The "Quick View" Modal (hidden by default) -->
+  <div class="quick-view-overlay" *ngIf="selectedProductForQuickView" (click)="closeQuickView()">
+    <div class="quick-view-modal" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeQuickView()">×</button>
+      <div class="quick-view-content" *ngIf="selectedProductForQuickView as product">
+        <div class="quick-view-image">
+          <img [src]="(imageBaseUrl + product.image)" [alt]="product.name">
+        </div>
+        <div class="quick-view-details">
+          <h2>{{ product.name }}</h2>
+          <div class="price-section">
+            <span class="price">R{{ product.price }}</span>
+            <!--<span *ngIf="product.rrp" class="rrp">R{{ product.rrp }}</span>-->
+          </div>
+          <p class="quick-view-desc">A divine essence to bring peace and protection to your home. Click "View Full Details" for more information.</p>
+          <div class="quick-view-actions">
+            <div class="quantity-selector">
+              <button (click)="quickViewQuantity = quickViewQuantity > 1 ? quickViewQuantity - 1 : 1">-</button>
+              <input type="number" [(ngModel)]="quickViewQuantity" min="1">
+              <button (click)="quickViewQuantity = quickViewQuantity + 1">+</button>
+            </div>
+            <button class="add-to-cart-btn" (click)="addToCartFromQuickView(product)">Add to Cart</button>
+          </div>
+          <a class="full-details-link" [routerLink]="['/listItem', product.id]" (click)="closeQuickView()">View Full Details →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
