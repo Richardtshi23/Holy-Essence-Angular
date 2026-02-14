@@ -58,7 +58,7 @@ export class ProductAdminService {
 
   /** Delete a product */
   async delete(id: number): Promise<void> {
-    await firstValueFrom(this.http.delete<void>(`${this.apiUrl}/productsAdmin/delete-product${id}`));
+    await firstValueFrom(this.http.delete<void>(`${this.apiUrl}/productsAdmin/deleteProductById/${id}`));
   }
 
   // 🔹 ORDERS
